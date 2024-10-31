@@ -1,13 +1,9 @@
-/**  @module Render
- * @description This module contains frontend-part of application
- * @author OPIE
- * */
-
-
 // variables region
+
+
 /**
- * @type {undefined | Object}
- * Contains a questions? categories and head of file with questions
+ * @var {undefined | Object} __file_json
+ * @description Contains a questions, categories and head of file with questions
  *
  * @default undefined
  */
@@ -16,36 +12,48 @@ let __file_json = undefined;
 
 /**
  *
- * @type {[Object]}
+ * @var {[Object]} __teams
+ * @description contains a name and points of all teams
  *
  * @default []
  */
 let __teams = [];
+
+
 /**
  *
- * @type {number}
- *
+ * @var {number} __teams_amount
+ * @description contains a number of teams
+ * @default 0
  * @private
  */
 let __teams_amount = 0;
+
+
 /**
  *
- * @type {Object}
+ * @var {Object} __current_team
+ * @description contains a current team
+ * @default {}
  *
  * @private
  */
 let __current_team = {};
+
 /**
  *
- * @type {number}
- *
+ * @var {number} __index_team
+ * @description using for auto naming team when it is creating
  * @private
+ * @default 0
  */
 let __index_team = 0;
+
 /**
  *
- * @type {number}
- *
+ * @var {number} __max_questions
+ * @description max number of questions
+ * @default 0
  * @private
  */
 let __max_questions = 0;
@@ -53,8 +61,9 @@ let __max_questions = 0;
 
 /**
  *
- * @type {number}
- *
+ * @var {number} __questions_amount
+ * @description number of questions answered
+ * @default 0
  * @private
  */
 let __questions_amount = 0;
@@ -218,7 +227,7 @@ function return_team() { // function that uses for creating a team
  *
  *
  * @function add_team
- * @description
+ * @description adding a new team
  *
  * @async
  *
@@ -233,6 +242,20 @@ async function add_team() { // function that uses for appending a new team
 
 }
 
+// region load pages
+
+
+/**
+ *
+ *
+ * @function page_question
+ * @description load on display a page that contains a question and field that used for writing answer
+ *
+ * @param {Object} obj - contains an information about question such as name and points
+ *
+ * @returns {Promise<void>}
+ * @async
+ */
 async function page_question(obj) {
 
 
@@ -261,72 +284,81 @@ async function page_question(obj) {
 
             const answer = obj["answer"]; // getting a correct answer on question
             let giving_answer;
+
             if (input.value.trim().toLowerCase() === answer.trim().toLowerCase()) { // checking
-                __teams[__current_team.number].points += Number(obj["grade"]);
-                giving_answer = document.createElement("div");
+                __teams[__current_team.number].points += Number(obj["grade"]); // incrementing a points of current team
+
+                giving_answer = document.createElement("div"); // create a green div
                 giving_answer.id = "answer-correct";
+
                 document.body.appendChild(giving_answer);
             } else {
-                giving_answer = document.createElement("div");
+                giving_answer = document.createElement("div"); // create a red div
                 giving_answer.id = "answer-wrong";
+
                 document.body.appendChild(giving_answer);
             }
-            setTimeout(() => {
+            setTimeout(() => { // removing green/red div
                 if (__questions_amount < __max_questions) {
                     document.body.removeChild(giving_answer);
                     document.body.removeChild(body); // remove a question page and return to page of list of questions
                     document.querySelector("#list").style.display = "block"; // make a list of questions a visible
+
                     change_team(); // changing a current team
                     load_team(); // load a team name to widget
                 }
             }, 3000);
+
             __questions_amount++;
-            if (__questions_amount >= __max_questions) {
-                const leader_board = document.createElement("div");
-                leader_board.id = "leader-board";
 
-                const leader_leader_board = document.createElement("div");
-                leader_leader_board.id = "leader-leader-board";
-                let string = "";
-                let __max_pointers = 0;
-                let __winner= __teams[0];
-                for (const i of __teams) {
-                    if (i.points > __max_pointers) {
-                        __max_pointers = i.points;
-                        __winner = i;
-                    }
-                }
-                string += `Победитель: ${__winner.name},  ${__max_pointers} очков\n\nТаблица участников\n`;
+            if (__questions_amount >= __max_questions) { // if there are no questions left
+                setTimeout(() => {
+                    const leader_board = document.createElement("div"); // create new page
+                    leader_board.id = "leader-board";
 
-                let sorted = __teams.sort((a, b) => {
-                    if (a.points > b.points) {
-                        return -1
+                    const leader_leader_board = document.createElement("div"); // create leader board
+                    leader_leader_board.id = "leader-leader-board";
+                    let string = ""; // create inner text for leader board
+                    let __max_pointers = 0; //max points
+                    let __winner = __teams[0]; // if we didn`t find a winner that winner is a first team
+                    for (const i of __teams) { // finding a player with the greatest points
+                        if (i.points > __max_pointers) {
+                            __max_pointers = i.points;
+                            __winner = i; // team
+                        }
                     }
-                    if (a.points < b.points) {
-                        return 1
+                    string += `Победитель: ${__winner.name},  ${__max_pointers} очков\n\nТаблица участников\n`; // header of leader board
+
+                    let sorted = __teams.sort((a, b) => { // rating of teams (winner -> loser)
+                        if (a.points > b.points) { // sorting function
+                            return -1
+                        }
+                        if (a.points < b.points) {
+                            return 1
+                        }
+                        return 0
+                    });
+                    for (const i of sorted) { // writing a rows of leader board
+                        string += `${i.name} :: ${i.points}\n`
                     }
-                    return 0
-                });
-                for (const i of sorted) {
-                    string += `${i.name} :: ${i.points}\n`
-                }
-                leader_leader_board.innerText = string;
-                leader_board.appendChild(leader_leader_board);
-                const new_game_button = document.createElement("button");
-                new_game_button.id = "leader-button";
-                new_game_button.addEventListener("click", async () => {
-                    __file_json = undefined;
-                    __teams = [];
-                    __max_questions = 0;
-                    __questions_amount = 0;
-                    __teams_amount = 0;
-                    __current_team = {};
-                    __index_team = 0;
-                    await page_file();
-                });
-                new_game_button.innerText = "новая игра";
-                leader_board.appendChild(new_game_button);
-                document.body.appendChild(leader_board);
+                    leader_leader_board.innerText = string; //set inner text for leader board
+                    leader_board.appendChild(leader_leader_board); // append leader board to page
+                    const new_game_button = document.createElement("button"); // create a new game button
+                    new_game_button.id = "leader-button";
+                    new_game_button.addEventListener("click", async () => {
+                        __file_json = undefined;
+                        __teams = [];
+                        __max_questions = 0;
+                        __questions_amount = 0;
+                        __teams_amount = 0;
+                        __current_team = {};
+                        __index_team = 0;
+                        await page_file(); // new game
+                    });
+                    new_game_button.innerText = "новая игра";
+                    leader_board.appendChild(new_game_button);
+                    document.body.appendChild(leader_board); // append leader board
+                }, 2000)
             }
 
         });
@@ -346,16 +378,26 @@ async function page_question(obj) {
 
 }
 
-// region load pages
+
+/**
+ *
+ *
+ * @function page_main
+ * @description load a main page
+ *
+ * @returns {Promise<void>}
+ *
+ *
+ */
 async function page_main() {
     const {API} = window;
     document.body.innerHTML = await API.load_page("page_quest_list.html");
-    await create_cats_widgets();
-    await change_team();
+    await create_cats_widgets(); // load categories
+    await change_team(); // set current team
     await load_team(); // load a team name to widget
+
+    // create a list of teams with his points
     const current_team = document.querySelector("#list-current-team");
-
-
     current_team.addEventListener("mouseover", () => {
         try {
             current_team.classList.remove("list-current-team-bottom");
@@ -394,6 +436,17 @@ async function page_main() {
 
 }
 
+/**
+ *
+ *
+ * @function page_teams
+ * @description load a page where players can create teams
+ *
+ * @returns {Promise<void>}
+ * @async
+ *
+ *
+ */
 async function page_teams() { // function that set a main page as 'page teams'
     const {API} = window; // load API
     document.body.innerHTML = await API.load_page("page_team.html"); // load the page
@@ -434,10 +487,22 @@ async function page_teams() { // function that set a main page as 'page teams'
                 await page_main() // load new page
             }
         );
-    await add_team();
+    await add_team(); // create two teams
     await add_team();
 }
 
+
+/**
+ *
+ *
+ * @function page_file
+ * @description load a page where players can load file with questions
+ *
+ * @returns {Promise<void>}
+ * @async
+ *
+ *
+ */
 async function page_file() { // function that set a main page as 'page file'
     const {API} = window; // load API
     document.body.innerHTML = await API.load_page("page_file.html"); // get page and set as main page
@@ -470,8 +535,9 @@ async function page_file() { // function that set a main page as 'page file'
 
 //end region
 
+
 window.addEventListener("DOMContentLoaded", async () => {
-    // const {API} = window;
+
     await page_file();
 
 })

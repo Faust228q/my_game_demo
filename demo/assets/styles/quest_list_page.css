@@ -190,3 +190,7 @@
     border-radius: 20px;
     font: 20pt Ubuntu;
 }
+
+#leader-button:hover {
+    transform: scale(1.05);
+}
