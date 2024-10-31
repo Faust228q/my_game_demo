@@ -1,0 +1,96 @@
+:root {
+    --bg: #D9D9D9;
+    --bt: #F68686;
+    --redo: #70D648;
+    --undo: #FF4444;
+    --green: #92DAAA;
+}
+
+* {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#file-bg {
+    background: var(--bg);
+    display: grid;
+
+    grid-template-areas:
+
+        ". . p . ."
+        ". . . . ."
+        ". . f . ."
+        ". . a . ."
+        ". . . . r";
+}
+
+#file-h {
+    grid-area: p;
+    font: 20pt Ubuntu;
+    text-align: center;
+}
+
+#file-in {
+    grid-area: f;
+    background: var(--bt);
+    width: 70%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    height: 50%;
+}
+
+#file-in-in {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    overflow-x: scroll;
+}
+
+#file-button-accept {
+    grid-area: a;
+    width: 50%;
+    height: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5% auto 0;
+    background: var(--bt);
+    border: 0 solid;
+    border-radius: 20px;
+    font: 15pt Ubuntu;
+    transition: transform 0.2s;
+}
+
+#file-button-accept:hover {
+    transform: scale(1.05);
+}
+
+#file-continue {
+    grid-area: r;
+}
+
+.button-continue {
+    width: 38%;
+    height: 65%;
+    background: var(--redo);
+    border-radius: 15px;
+    border: 0 solid;
+    transition: transform 0.3s;
+
+}
+
+.button-continue:hover {
+    transform: scale(1.1);
+}

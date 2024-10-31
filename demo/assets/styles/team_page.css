@@ -1,0 +1,152 @@
+
+#team-bg {
+    background: var(--bg);
+}
+
+#team-header {
+    height: 10%;
+    background: var(--bg);
+    border-bottom: 4px solid var(--bt);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+#team-header > p {
+    font: 20pt Ubuntu;
+    text-align: center;
+
+
+    margin: auto;
+}
+
+
+#team-teams::-webkit-scrollbar {
+    height: 0;
+}
+
+#team-footer {
+    height: 20%;
+    background: var(--bg);
+    border-top: 4px solid var(--bt);
+    display: grid;
+    grid-template-areas:
+            "u . . a . . r";
+}
+
+#team-undo {
+    grid-area: u;
+}
+
+#team-redo {
+    grid-area: r;
+}
+
+#team-add {
+    grid-area: a;
+}
+
+
+.button-continue1 {
+    width: 40%;
+    height: 55%;
+    background: var(--redo);
+    border-radius: 15px;
+    border: 0 solid;
+    transition: transform 0.3s;
+    margin: auto;
+
+}
+
+.button-continue1:hover {
+    transform: scale(1.05);
+}
+
+#team-add {
+    width: 32%;
+    height: 65%;
+    border-radius: 50px;
+    background: var(--bt);
+    margin: auto;
+    border: 0 solid;
+    transition: transform 0.3s;
+}
+
+#team-add:hover {
+    transform: scale(1.1);
+}
+
+.button-undo1 {
+    width: 40%;
+    height: 55%;
+    background: var(--undo);
+    border-radius: 15px;
+    border: 0 solid;
+    transition: transform 0.3s;
+    margin: auto;
+
+}
+
+.button-undo1:hover {
+    transform: scale(1.05);
+
+}
+
+#team-teams {
+
+    height: 70%;
+    background: var(--bg);
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 5%;
+}
+
+.team-team {
+    flex: 0 0 auto;
+    /*position: absolute;*/
+    width: 20%;
+    height: 80%;
+    border-radius: 25px;
+    margin: auto 0;
+    background: var(--green);
+    display: grid;
+    grid-template-areas:
+        "i r"
+        ". ."
+        ". ."
+        ". ."
+        ". ."
+        ". ."
+        "b b";
+}
+
+.team-team-name {
+    grid-area: i;
+    width: 50%;
+    height: 75%;
+    margin: auto;
+    caret-color: white;
+    background: transparent;
+    font: 20pt Ubuntu;
+    border: 0 solid;
+}
+
+.team-team-users::-webkit-scrollbar {
+    width: 0;
+}
+
+.team-team-rem {
+    grid-area: r;
+    /*width: 80%;*/
+    /*height: 30%;*/
+    background: var(--undo);
+    border-radius: 50px;
+    border: 0 solid;
+    margin: auto;
+    width: 60%;
+    height: 60%;
+}
+

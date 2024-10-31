@@ -1,0 +1,192 @@
+#list {
+    /*display: flex;*/
+    /*    flex-direction: column;*/
+    background: var(--bg);
+}
+
+#list-header {
+    height: 10%;
+    background: var(--bt);
+    font: 20pt Ubuntu;
+
+}
+
+#list-header > p {
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+
+#list-cats {
+    background: var(--bg);
+    height: 80%;
+    display: flex;
+    gap: 10%;
+    overflow-x: auto;
+}
+
+.list-cats-cat {
+    background: var(--green);
+    flex: 0 0 auto;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 15%;
+    border-radius: 20px;
+    margin-top: 2%;
+
+}
+
+.list-cats-cat-name {
+    font: 30pt Ubuntu;
+    text-align: center;
+    height: 10%;
+    overflow-x: auto;
+}
+
+.list-cats-cat-name::-webkit-scrollbar {
+    height: 0;
+}
+
+.list-cats-cat-list {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    overflow-y: auto;
+    height: 90%;
+}
+
+.list-cats-cat-list::-webkit-scrollbar {
+    width: 0;
+}
+
+.list-cats-cat-list-question {
+    transition: background 0.3s;
+    width: 80%;
+    height: 10%;
+    flex: 0 0 auto;
+    margin: 20% auto 0;
+    text-align: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: 0 solid;
+}
+
+.list-cats-cat-list-question:hover {
+    background: var(--bt);
+}
+
+
+#list-current-team {
+    width: 20%;
+    height: 50%;
+    border-radius: 20px 20px 0 0;
+    background: var(--bt);
+    font: 15pt Ubuntu;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+
+}
+
+
+.list-current-team-top {
+    animation: list-current-top 1s;
+    bottom: 35%;
+}
+
+@keyframes list-current-top {
+    0% {
+        bottom: 0;
+    }
+    100% {
+        bottom: 35%;
+    }
+
+}
+
+.list-current-team-bottom {
+    animation: list-current-bottom 1s;
+    bottom: 0;
+}
+
+@keyframes list-current-bottom {
+    0% {
+        bottom: 35%;
+    }
+    100% {
+        bottom: 0;
+    }
+
+}
+
+#leader-board {
+    position: absolute;
+    animation: load-leader-board 1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    background: var(--bt);
+
+}
+#leader-leader-board {
+    position: absolute;
+    animation: load-leader-board 1s;
+    opacity: 50%;
+    background: #4a151e;
+    font: 30pt Ubuntu;
+    text-align: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto 15%;
+    width: 35%;
+    height: 50%;
+    overflow: auto;
+    border-radius: 20px;
+}
+#leader-leader-board::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+@keyframes load-leader-board {
+    0% {
+        top: 200%;
+    }
+
+    100%{
+        top: 0;
+    }
+}
+
+#leader-button{
+    transition: transform 0.2s;
+    width: 20%;
+    height: 20%;
+    background: #4a151e;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 30% auto 0;
+    border: 0 solid;
+    border-radius: 20px;
+    font: 20pt Ubuntu;
+}

@@ -1,0 +1,20 @@
+{
+  "head": {
+    "type": "quest/list",
+    "name": "Программирование",
+    "grade": {
+      "min": 0,
+      "max": 50
+    }
+  },
+  "data": {
+    "ЯП": {
+      "1": {
+        "question": "null",
+        "answer": "null",
+        "grade": 10
+      }
+    }
+
+  }
+}
