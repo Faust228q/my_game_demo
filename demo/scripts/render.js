@@ -152,12 +152,19 @@ function create_cats_widgets() {
             button.className = "list-cats-cat-list-question";
             button.addEventListener("click", async () => {
                 /**
-                 * @callback
+                 * @event
                  * @async
                  * @description update a page after button wqs pressed
                  * @return {Promise<void>}
                  */
                 button.disabled = true; // disable a pressed button
+
+                document.querySelector("#list-current-team")
+                    .classList.remove("list-current-team-top");
+
+                document.querySelector("#list-current-team")
+                    .classList.remove("list-current-team-bottom");
+
                 await page_question(__question) // update page
             });
             button.innerHTML = __question["grade"]; // write points in button

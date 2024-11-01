@@ -101,7 +101,7 @@ function createWindow() { // function that creates a main window
         width: width,
         height: height,
         title: "OPIE",
-        icon: path.join(__dirname, "../assets/images/ico/opie-ide-logo.ico"),
+        icon: path.join(__dirname, "../assets/images/ico/opie-my-game.ico"),
         webPreferences: {
             contextIsolation: true,
             preload: path.join(__dirname, "preload.js") // path to file with API
