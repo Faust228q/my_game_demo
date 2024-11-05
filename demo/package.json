@@ -1,0 +1,36 @@
+{
+  "name": "my_game",
+  "version": "1.0.0",
+  "main": "scripts/bg.js",
+  "build": {
+    "appId": "com.example.opiemygame",
+    "productName": "OPIE my game",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  },
+  "scripts": {
+    "run": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "electron-builder",
+    "pack": "electron-builder --dir"
+  },
+  "author": "OPIE",
+  "license": "GPL-3.0",
+  "description": "",
+  "devDependencies": {
+    "electron": "^33.0.2",
+    "electron-builder": "^25.1.8",
+    "jsdoc": "^4.0.4"
+  }
+}
+
